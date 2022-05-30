@@ -1,13 +1,13 @@
 import pg from 'pg';
+import dotenv from 'dotenv';
+
+dotenv.config();
+const { DATABASE_URL } = process.env
 
 const { Pool } = pg;
 
 const connectionInfo = {
-    user: 'postgres',
-    password: '123456',
-    host: 'localhost',
-    port: 5432,
-    database: 'meu_banco_de_dados'
+    connectionString: DATABASE_URL
 };
 
 export default new Pool(connectionInfo);
