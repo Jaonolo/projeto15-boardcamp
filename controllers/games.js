@@ -2,14 +2,10 @@ import client from '../db.js'
 
 export const getGames = async (req, res) => {
     try {
-        let query
-        if(req.query.name) {
-            query =  await client.query(`select g.*, c.name as "categoryName" from games g join categories c on g."categoryId"=c.id where g.name like $1`, [
-                req.query.name + '%'
-            ]);
-        } else {
-            query =  await client.query(`select g.*, c.name as "categoryName" from games g join categories c on g."categoryId"=c.id`);
-        }
+        const qname = req.query.name || ''
+        const query =  await client.query(`select g.*, c.name as "categoryName" from games g join categories c on g."categoryId"=c.id where g.name like $1`, [
+            qname + '%'
+        ]);
 
         res.send(query.rows)
 

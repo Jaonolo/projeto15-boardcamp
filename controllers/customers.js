@@ -2,14 +2,10 @@ import client from '../db.js'
 
 export const getCustomers = async (req, res) => {
     try {
-        let query
-        if(req.query.cpf) {
-            query = await client.query(`select * from customers c where c.cpf like $1`, [
-                req.query.cpf + '%'
-            ]);
-        } else {
-            query =  await client.query(`select * from customers`);
-        }
+        const cpf = req.query.cpf || ''
+        const query = await client.query(`select * from customers c where c.cpf like $1`, [
+            cpf + '%'
+        ]);
 
         res.send(query.rows)
 
