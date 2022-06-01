@@ -22,4 +22,6 @@ app.use(customersRouter)
 app.use(rentalsRouter)
 /* */
 
+app.get('/', () => 'https://github.com/Jaonolo/projeto15-boardcamp')
+
 app.listen((PORT || 4000), () => console.log(`Server successfully running on port ${PORT}`));
